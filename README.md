@@ -4,7 +4,8 @@ Skills I've created for Claude Code, Codex and other agents that read `SKILL.md`
 
 ## Available skills
 
-- [/portfolio](skills/portfolio): Record your projects, contributions and decisions for case studies, CVs and career discussions.
+### [/portfolio](skills/portfolio)
+Record contributions, decisions, and key context over time across personal and work projects. 
 
 ## Install
 
