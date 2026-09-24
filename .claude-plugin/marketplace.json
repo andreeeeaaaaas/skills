@@ -1,0 +1,19 @@
+{
+  "name": "andreeeeaaaaas-skills",
+  "owner": {
+    "name": "andreeeeaaaaas"
+  },
+  "metadata": {
+    "description": "Agent skills by andreeeeaaaaas",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "portfolio",
+      "description": "Build an evidence-backed record of your projects, contributions, decisions and outcomes for portfolio narratives and career discussions.",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/portfolio"]
+    }
+  ]
+}
