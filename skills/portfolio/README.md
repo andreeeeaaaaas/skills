@@ -1,16 +1,18 @@
+---
+---
 # Portfolio
 
-Use `/portfolio` to keep a record of your personal and work projects: what you contributed, the decisions you made, and the outcomes you can support with evidence. Over time, those records give you material for portfolio stories, CV examples, and career discussions. Your agent can reconstruct earlier work and add significant changes as you go.
+Use `/portfolio` to record contributions, decisions, and supported outcomes across personal and work projects. Your agent reconstructs earlier work and records significant changes as you go, giving you material for case studies, CVs, and career discussions.
 
 ## Installation
 
-Keep one shared copy of this folder where your agents can read it. The skill needs `SKILL.md` and `references/format.md`. Setup instructions follow below; no command-line tool or service needs to run.
+Keep a shared copy of this folder, including `SKILL.md` and `references/format.md`, where your local agents can read it. No service or command-line tool is required.
 
-If your agent supports skill folders, copy or link this folder into its configured skills directory. Use links to the shared copy where possible so edits reach every agent.
+For agents that support skill folders, link or copy this folder into each agent’s skills directory. Links keep agents using the same copy.
 
-You can also point agents to the skill through their instructions. Append the snippet below to the appropriate project or global instruction file: `AGENTS.md` for Codex and agents that read it, or `CLAUDE.md` for Claude Code. Keep any existing instructions.
+You can also append this snippet to your project or global instructions: `AGENTS.md` for Codex, or `CLAUDE.md` for Claude Code. Keep existing instructions.
 
-Replace `<skill-path>` with the path to this folder. Use an absolute path for a shared copy on your machine. If you keep the skill inside a project at `skills/portfolio/`, use that relative path.
+Replace `<skill-path>` with an absolute path to the shared copy, or `skills/portfolio` if stored in the project.
 
 ```markdown
 ## Portfolio
@@ -22,21 +24,21 @@ Only initialise tracking when asked. All agents should use the same
 `portfolio/` files, with one agent writing at a time.
 ```
 
-Configure each agent you use. For agents that do not read instruction files, attach `SKILL.md` and `references/format.md` or add them to project instructions. Give the agent access to the project and its `portfolio/` files. A chat-only AI can review files you supply; you will need to save its edits yourself.
-
-Use one shared copy for local agents. Cloud accounts need their own setup; local installation does not upload the skill to them.
+Configure each agent, including cloud accounts, separately. If an agent cannot read local instructions, attach `SKILL.md` and `references/format.md` or add them to its project instructions. Give it access to the project and its `portfolio/` files. For chat-only AI, supply the files and save its edits yourself.
 
 ## Use
 
-`/portfolio` updates an existing record or initialises one if absent. Slash-command support depends on your agent and setup. You can always ask in natural language:
+`/portfolio` updates an existing record or creates one. Slash-command support varies by agent; you can also ask in plain language:
 
-- `/portfolio init` or “Initialise Portfolio for this project.” The agent reviews existing history before creating `portfolio/`.
-- `/portfolio update` or “Update Portfolio since the last checkpoint.” The agent records significant changes and saves where it finished reviewing.
-- `/portfolio review` or “Review Portfolio.” The agent summarises the history, uncertainties, and gaps without changing the files.
+- `/portfolio init` or “Initialise Portfolio for this project.” Reviews project history before creating `portfolio/`.
+- `/portfolio update` or “Update Portfolio since the last checkpoint.” Records significant changes and saves the review checkpoint.
+- `/portfolio review` or “Review Portfolio.” Summarises history, uncertainties, and gaps without changing files.
 
-After the project, ask: “Use `portfolio/` to draft my portfolio narrative, preserving attribution and flagging unsupported claims.” Tracking does not write the narrative automatically.
+To turn the records into a narrative, ask: “Use `portfolio/` to draft my portfolio narrative, preserving attribution and flagging unsupported claims.” Tracking does not draft it automatically.
 
-For a review across projects, point the agent to the records you want it to use. Each project keeps its own four files:
+## Records
+
+Each project keeps four files. For a review across projects, point the agent to the records to use.
 
 ```text
 portfolio/
@@ -46,8 +48,10 @@ portfolio/
 └── state.json
 ```
 
-Your agent updates the history during a session when it has loaded the skill. There is no background tracking. Keep `portfolio/` available to every agent working on the project. The records are personal, so the agent will suggest ignoring `portfolio/` in Git if it isn't already. It does not edit `.gitignore`, commit or publish the files, or count its own edits as project milestones.
+Updates happen during sessions with the skill loaded; there is no background tracking. Give every agent access to the same `portfolio/` folder.
 
-For work projects, keep internal evidence where your organisation allows it. Confirm what you can share before using it in a public portfolio. Record your contribution separately from the team’s work.
+The records are personal. The agent suggests ignoring `portfolio/` in Git if needed, but does not edit `.gitignore`, commit or publish records, or count record edits as project milestones.
+
+For work projects, store evidence only where your organisation allows, confirm what you can share publicly, and distinguish your contribution from the team’s work.
 
 See [VALIDATION.md](VALIDATION.md) for the local smoke test and its limits.

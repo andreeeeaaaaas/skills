@@ -1,10 +1,12 @@
+---
+---
 # Skills
 
 Agent skills for Claude Code, Codex and other agents that read `SKILL.md` folders.
 
 | Skill | What it does |
 | --- | --- |
-| [portfolio](skills/portfolio) | Keeps an evidence-backed record of your projects, contributions, decisions and outcomes in `portfolio/`, ready for case studies, CVs and career discussions. |
+| [portfolio](skills/portfolio) | Records projects, contributions, decisions and outcomes with supporting evidence for case studies, CVs and career discussions. |
 
 ## Install
 
@@ -15,7 +17,7 @@ Agent skills for Claude Code, Codex and other agents that read `SKILL.md` folder
 /plugin install portfolio@andreeeeaaaaas-skills
 ```
 
-### skills CLI
+### Skills CLI
 
 ```sh
 npx skills add andreeeeaaaaas/skills
