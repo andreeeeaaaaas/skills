@@ -1,44 +1,30 @@
----
----
 # Portfolio
 
-Use `/portfolio` to record contributions, decisions, and supported outcomes across personal and work projects. Your agent reconstructs earlier work and records significant changes as you go, giving you material for case studies, CVs, and career discussions.
+Use `/portfolio` to record contributions, decisions, and supported outcomes across personal and work projects.
 
-## Installation
+When initialised, your agent summarises earlier work and can then record significant changes as you go, giving you material for case studies, CVs, and career discussions. The skill creates and updates records across three editable `.md` files.
 
-Keep a shared copy of this folder, including `SKILL.md` and `references/format.md`, where your local agents can read it. No service or command-line tool is required.
+Most useful for projects involving Git, long-running chats, or files connected to a repository.
 
-For agents that support skill folders, link or copy this folder into each agent’s skills directory. Links keep agents using the same copy.
+## Setup
 
-You can also append this snippet below to your project or global instructions: `AGENTS.md` for Codex, or `CLAUDE.md` for Claude Code.
-
-Replace `<skill-path>` with an absolute path to the shared copy, or `skills/portfolio` if stored in the project.
-
-```markdown
-## Portfolio
-
-For Portfolio requests, read `<skill-path>/SKILL.md` and follow its
-linked format reference. When the project root contains `portfolio/`,
-load the skill and update the history at meaningful work checkpoints.
-Only initialise tracking when asked. All agents should use the same
-`portfolio/` files, with one agent writing at a time.
-```
-
-Configure each agent, including cloud accounts, separately. If an agent cannot read local instructions, attach `SKILL.md` and `references/format.md` or add them to its project instructions. Give it access to the project and its `portfolio/` files. For chat-only AI, supply the files and save its edits yourself.
+Follow the [installation instructions](../../README.md#install), then give your AI access to the project or supply the relevant files and notes.
 
 ## Use
 
-`/portfolio` updates an existing record or creates one. Slash-command support varies by agent; you can also ask in plain language:
+Ask your AI:
 
-- `/portfolio init` or “Initialise Portfolio for this project.” Reviews project history before creating `portfolio/`.
-- `/portfolio update` or “Update Portfolio since the last checkpoint.” Records significant changes and saves the review checkpoint.
-- `/portfolio review` or “Review Portfolio.” Summarises history, uncertainties, and gaps without changing files.
+- **“Initialise Portfolio for this project.”** Review existing evidence and create the records.
+- **“Update Portfolio.”** Record significant changes since the last review.
+- **“Review Portfolio.”** Summarise contributions, outcomes and gaps without changing the records.
 
-To turn the records into a narrative, ask: “Use `portfolio/` to draft my portfolio narrative, preserving attribution and flagging unsupported claims.” Tracking does not draft it automatically.
+Where slash commands are supported, use `/portfolio init`, `/portfolio update` or `/portfolio review`.
 
-## Records
+To draft a case study, ask: “Use these records to draft my portfolio narrative. Preserve attribution and flag unsupported claims.”
 
-Each project keeps four files. For a review across projects, point the agent to the records to use.
+## What it saves
+
+Each project keeps its own records:
 
 ```text
 portfolio/
@@ -48,10 +34,25 @@ portfolio/
 └── state.json
 ```
 
-Updates happen during sessions with the skill loaded; there is no background tracking. Give every agent access to the same `portfolio/` folder.
+These hold the project context, milestones, decisions and review checkpoint. Unsupported claims stay marked as unknown.
 
-The records are personal. The agent suggests ignoring `portfolio/` in Git if needed, but does not edit `.gitignore`, commit or publish records, or count record edits as project milestones.
+For a review across projects, supply each project’s records.
 
-For work projects, store evidence only where your organisation allows, confirm what you can share publicly, and distinguish your contribution from the team’s work.
+## Optional checkpoint tracking
 
-See [VALIDATION.md](VALIDATION.md) for the local smoke test and its limits.
+To encourage updates during project work, add this to your AI’s persistent instructions, such as `AGENTS.md`, `CLAUDE.md` or project instructions:
+
+```text
+When this project contains portfolio/, follow the Portfolio skill
+at meaningful work checkpoints. Read its SKILL.md and linked format
+reference. Only initialise tracking when asked. Preserve existing
+records and allow one writer at a time.
+```
+
+Make sure each AI can access the skill and the same records. Updates happen during active sessions; there is no background tracking.
+
+## Privacy
+
+Keep records private unless you choose to share them. For work projects, follow your organisation’s storage and sharing rules, and distinguish your contribution from the team’s work.
+
+See [validation results and limits](VALIDATION.md).

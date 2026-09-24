@@ -1,40 +1,37 @@
----
----
 # Skills
 
-Agent skills for Claude Code, Codex and other agents that read `SKILL.md` folders.
+Skills I've created for Claude Code, Codex and other agents that read `SKILL.md` folders.
 
-| Skill | What it does |
-| --- | --- |
-| [portfolio](skills/portfolio) | Records projects, contributions, decisions and outcomes with supporting evidence for case studies, CVs and career discussions. |
+## Available skills
+
+- [/portfolio](skills/portfolio): Record your projects, contributions and decisions for case studies, CVs and career discussions.
 
 ## Install
 
-### Claude Code plugin
-
-```
-/plugin marketplace add andreeeeaaaaas/skills
-/plugin install portfolio@andreeeeaaaaas-skills
-```
+Choose the method your AI supports. If you're unsure which to use, copy [this repository’s URL](https://github.com/andreeeeaaaaas/skills) and ask your agent to install the skills.
 
 ### Skills CLI
+
+For compatible agents:
 
 ```sh
 npx skills add andreeeeaaaaas/skills
 ```
 
-### Manual
+### AI chats and projects
 
-Clone the repo and link a skill into your agent's skills folder:
+Upload the skill’s `SKILL.md` and any referenced files. For `/portfolio`, include `references/format.md`.
 
-```sh
-git clone https://github.com/andreeeeaaaaas/skills.git ~/skills
-ln -s ~/skills/skills/portfolio ~/.claude/skills/portfolio
+### Claude Code plugin
+
+```text
+/plugin marketplace add andreeeeaaaaas/skills
+/plugin install portfolio@andreeeeaaaaas-skills
 ```
 
-### Claude.ai
+### Manual installation
 
-Zip a skill folder, such as `skills/portfolio`, and upload it under Settings → Capabilities → Skills.
+Download this repository and copy the complete skill folder, such as `skills/portfolio/`, into your agent’s skills directory. Check your agent’s documentation for its location.
 
 ## Licence
 
