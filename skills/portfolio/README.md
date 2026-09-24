@@ -1,6 +1,6 @@
 # Portfolio
 
-Use `/portfolio` to record contributions, decisions, and supported outcomes across personal and work projects.
+Use `/portfolio` to record contributions, decisions, and key context over time across personal and work projects.
 
 When initialised, your agent summarises earlier work and can then record significant changes as you go, giving you material for case studies, CVs, and career discussions. The skill creates and updates records across three editable `.md` files.
 
