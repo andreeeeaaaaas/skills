@@ -10,7 +10,7 @@ Keep a shared copy of this folder, including `SKILL.md` and `references/format.m
 
 For agents that support skill folders, link or copy this folder into each agent’s skills directory. Links keep agents using the same copy.
 
-You can also append this snippet to your project or global instructions: `AGENTS.md` for Codex, or `CLAUDE.md` for Claude Code. Keep existing instructions.
+You can also append this snippet below to your project or global instructions: `AGENTS.md` for Codex, or `CLAUDE.md` for Claude Code.
 
 Replace `<skill-path>` with an absolute path to the shared copy, or `skills/portfolio` if stored in the project.
 
