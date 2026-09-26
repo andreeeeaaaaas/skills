@@ -35,7 +35,7 @@ If the user passes text after `/tmpmd` (other than `on` or `off`), write that te
 
 A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) rewrites one file per session, `$TMPDIR/tmpmd/session-<id>.md`, after every response. It opens the file on first write; Obsidian refreshes the open tab after that.
 
-- `/tmpmd on`: run the command below, then reply with only `tmpmd on`. The file opens after your next response.
+- `/tmpmd on`: run the command below, then reply with only `tmpmd on`. The file opens straight away and updates after each response.
   ```bash
   tmp="${TMPDIR:-/tmp}"; mkdir -p "${tmp%/}/tmpmd/on" && touch "${tmp%/}/tmpmd/on/$CLAUDE_CODE_SESSION_ID"
   ```
