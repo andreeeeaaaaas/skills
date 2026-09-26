@@ -1,6 +1,6 @@
 ---
 name: tmpmd
-description: Save your last response, with the prompt that triggered it, to a temporary Markdown file and open it in the default Markdown app (Obsidian). Use for /tmpmd, or when the user asks to open, view or read the last output as Markdown.
+description: Save your last response, with the prompt that triggered it, to a temporary Markdown file and open it in the default Markdown app (Obsidian). Use for /tmpmd, /tmpmd on, /tmpmd off, or when the user asks to open, view or read the last output as Markdown.
 ---
 
 # tmpmd
@@ -29,4 +29,20 @@ On Linux use `xdg-open` instead of `open`.
 
 5. Reply with only the file path.
 
-If the user passes text after `/tmpmd`, write that text instead of the last response and leave out the prompt line.
+If the user passes text after `/tmpmd` (other than `on` or `off`), write that text instead of the last response and leave out the prompt line.
+
+## Continuous mode (Claude Code only)
+
+A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) rewrites one file per session, `$TMPDIR/tmpmd/session-<id>.md`, after every response. It opens the file on first write; Obsidian refreshes the open tab after that.
+
+- `/tmpmd on`: run the command below, then reply with only `tmpmd on`. The file opens after your next response.
+  ```bash
+  tmp="${TMPDIR:-/tmp}"; mkdir -p "${tmp%/}/tmpmd/on" && touch "${tmp%/}/tmpmd/on/$CLAUDE_CODE_SESSION_ID"
+  ```
+- `/tmpmd off`: run the command below, then reply with only `tmpmd off`.
+  ```bash
+  tmp="${TMPDIR:-/tmp}"; rm -f "${tmp%/}/tmpmd/on/$CLAUDE_CODE_SESSION_ID"
+  ```
+- If the user closed the tab, reopen it with `open "${TMPDIR%/}/tmpmd/session-${CLAUDE_CODE_SESSION_ID:0:8}.md"`.
+
+In other agents, or if `$CLAUDE_CODE_SESSION_ID` is empty, say continuous mode needs the Claude Code hook and stop.
