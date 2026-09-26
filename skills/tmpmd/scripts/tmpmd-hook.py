@@ -2,7 +2,7 @@
 """Claude Code Stop hook for /tmpmd continuous mode.
 
 When $TMPDIR/tmpmd/on/<session_id> exists, writes the last prompt and response
-to $TMPDIR/tmpmd/session-<id>.md. Opens it on first write; Obsidian refreshes
+to $TMPDIR/tmpmd/<project>-continuous-<id>.md. Opens it on first write; Obsidian refreshes
 the open tab on later writes. Never blocks or fails the session.
 """
 import json
@@ -68,7 +68,8 @@ def main():
     response = (lam if isinstance(lam, str) and lam.strip() else response).strip()
     if not response:
         return
-    path = os.path.join(base, f"session-{session[:8]}.md")
+    project = re.sub(r"[^\w.-]+", "-", os.path.basename((data.get("cwd") or "").rstrip("/"))).strip("-") or "session"
+    path = os.path.join(base, f"{project}-continuous-{session[:8]}.md")
     is_new = not os.path.exists(path)
     with open(path, "w") as f:
         f.write((f"> {prompt}\n\n" if prompt else "") + response + "\n")

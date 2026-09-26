@@ -33,7 +33,7 @@ If the user passes text after `/tmpmd` (other than `on` or `off`), write that te
 
 ## Continuous mode (Claude Code only)
 
-A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) rewrites one file per session, `$TMPDIR/tmpmd/session-<id>.md`, after every response. It opens the file on first write; Obsidian refreshes the open tab after that.
+A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) rewrites one file per session, `$TMPDIR/tmpmd/<project>-continuous-<id>.md` (project is the session's folder name), after every response. It opens the file on first write; Obsidian refreshes the open tab after that.
 
 - `/tmpmd on`: run the command below, then reply with only `tmpmd on`. The file opens straight away and updates after each response.
   ```bash
@@ -43,6 +43,6 @@ A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) r
   ```bash
   tmp="${TMPDIR:-/tmp}"; rm -f "${tmp%/}/tmpmd/on/$CLAUDE_CODE_SESSION_ID"
   ```
-- If the user closed the tab, reopen it with `open "${TMPDIR%/}/tmpmd/session-${CLAUDE_CODE_SESSION_ID:0:8}.md"`.
+- If the user closed the tab, reopen it with `open "${TMPDIR%/}"/tmpmd/*-continuous-"${CLAUDE_CODE_SESSION_ID:0:8}".md`.
 
 In other agents, or if `$CLAUDE_CODE_SESSION_ID` is empty, say continuous mode needs the Claude Code hook and stop.
