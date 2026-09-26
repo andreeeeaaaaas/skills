@@ -13,6 +13,8 @@ Use standard filesystem, Git, Markdown, and JSON capabilities. Use `/portfolio i
 
 Store all project history in the project root's `portfolio/`: `context.md`, `timeline.md`, `decisions.md`, and `state.json`. Read [references/format.md](references/format.md) before creating or changing records. Markdown is authoritative; JSON holds only review state. Preserve human edits, milestone titles and decision IDs.
 
+When one repository holds several distinct projects, such as a monorepo or a collection of skills, keep one named record per project in `portfolio/<name>/`, using a short kebab-case name. Each named record has the same four files and its own state, with `scope` listing the project-relative paths it covers. Use plain `portfolio/` for a repository that is one project. Do not mix the two layouts: if a single record exists and the user starts tracking a second project, offer to move the existing record into `portfolio/<name>/` first. Wherever these instructions say `portfolio/`, apply them to the relevant named record.
+
 The folder is visible, not hidden. A legacy hidden `.portfolio/` is the same record: use it, and offer to rename it to `portfolio/` rather than creating a second record.
 
 The records are personal. In a Git repository, check whether `portfolio/` is ignored (`git check-ignore -q portfolio/`). If not, tell the user and suggest adding `portfolio/` to `.gitignore`, or to `.git/info/exclude` to keep it off a shared ignore file. Do not edit either file unless asked.
@@ -48,7 +50,7 @@ For work projects, respect the project's rules on confidentiality and storage. K
 
 ## Init
 
-1. Identify the intended project root and check `portfolio/` before creating anything. If complete, use update. If partial, read and preserve it, reconstruct only missing material, and resolve incompatible formats without overwriting them.
+1. Identify the intended project root and check `portfolio/` before creating anything. If named records exist or the repository holds several distinct projects, work out which project the user means and use `portfolio/<name>/`; confirm the name and scope when they are unclear. If complete, use update. If partial, read and preserve it, reconstruct only missing material, and resolve incompatible formats without overwriting them.
 2. Inspect the project before writing files: current structure, README and docs, architecture/design/research notes, TODOs, package changes, and, where available, Git history, meaningful historical diffs, relevant branches and tags. Exclude generated files, dependencies, and Portfolio's own records from candidate milestones. Do not change branches or repository contents to inspect history.
 3. Start with an overview, then inspect evidence around likely turning points. Useful Git operations include `git status --short`, `git log --date=iso-strict --format=fuller --stat`, `git show <commit> -- <path>`, and `git diff <base> <tip> -- <paths>`. Commit subjects are leads, not proof. Compare intermediate states when an approach was introduced and later removed, even if the final diff is small.
 4. Reconstruct chronological milestones and consequential decisions. Use the current checkout's reachable history as the default scope. Inspect other branches only when useful, label unmerged work, and do not present it as delivered. Note shallow history or other coverage limits.
@@ -58,7 +60,7 @@ For work projects, respect the project's rules on confidentiality and storage. K
 
 ## Update / checkpoint
 
-1. Read all four files and the current Git status. Validate state before using it. Preserve and diagnose malformed state or an unsupported version; do not silently reset the cursor.
+1. Identify the record to update. With named records, update the one the user names; otherwise update each record whose `scope` the new changes touch, and ignore changes outside every scope. Describe a change shared by several projects in each record's own terms. Read all four files and the current Git status. Validate state before using it. Preserve and diagnose malformed state or an unsupported version; do not silently reset the cursor.
 2. Capture the current HEAD as the review tip. If the previous cursor exists and is an ancestor of that tip, inspect the intervening commits and relevant diffs. Also inspect relevant working-tree changes and new user evidence, even if HEAD is unchanged. Exclude `portfolio/` edits themselves.
 3. If the cursor is null, missing from Git, or not an ancestor, inspect available history and existing evidence to reconcile a baseline. This may indicate first commits, a shallow clone, a rebase, or a branch switch. Do not assume a simple forward range or erase earlier history. Record the coverage limitation and use a new baseline only after reviewing the relevant available material. With no Git, compare the current project with the recorded baseline; explicitly state that exact change coverage is unavailable.
 4. Apply the significance heuristic. Extend, correct, or append entries only when warranted. Deduplicate by meaning and evidence, including provisional entries now committed. Keep decision rationale separate from implementation evidence. Record reversals by linking the earlier decision; preserve what was believed at the time.
@@ -68,6 +70,6 @@ For work projects, respect the project's rules on confidentiality and storage. K
 
 ## Review
 
-Read the records and spot-check important evidence against available sources. Summarise current context, the user’s contributions, supported outcomes and lessons, major milestones, consequential decisions, inferred or uncertain claims, and a short prioritised list of gaps worth filling. Check for commit-by-commit noise, unsupported rationale or impact, duplicated entries, stale context, coverage limitations, and contradictions.
+Read the records and spot-check important evidence against available sources. With named records, review the one named, or each separately with its attribution. Summarise current context, the user’s contributions, supported outcomes and lessons, major milestones, consequential decisions, inferred or uncertain claims, and a short prioritised list of gaps worth filling. Check for commit-by-commit noise, unsupported rationale or impact, duplicated entries, stale context, coverage limitations, and contradictions.
 
 Review is read-only by default and does not advance the cursor. If asked to repair the history, apply supported corrections using update. Do not turn review into a polished portfolio case study. These files can later supply a separately requested narrative, with uncertainty and attribution preserved.

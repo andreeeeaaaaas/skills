@@ -1,6 +1,6 @@
 # Record format and templates
 
-Use only the four files below in `portfolio/`. Replace template tokens with evidence or an `[unknown: …]` prompt; omit unused entry templates. Use project-relative paths and explicit dates. Periods may be approximate if labelled. Commit timestamps indicate repository activity, not necessarily the date of research or a decision.
+Use only the four files below in `portfolio/`, or in `portfolio/<name>/` for a named record. Replace template tokens with evidence or an `[unknown: …]` prompt; omit unused entry templates. Use project-relative paths and explicit dates. Periods may be approximate if labelled. Commit timestamps indicate repository activity, not necessarily the date of research or a decision.
 
 ## context.md
 
@@ -134,10 +134,11 @@ An earlier implementation proves that approach existed, not that it was formally
   "initialised_at": null,
   "last_reviewed_commit": null,
   "last_reviewed_at": null,
-  "coverage_notes": []
+  "coverage_notes": [],
+  "scope": []
 }
 ```
 
-On init replace timestamp nulls with actual UTC ISO 8601 timestamps. `last_reviewed_commit` is a full verified commit ID, or null when no Git commit has been reviewed. `last_reviewed_at` records init/update review time, not a read-only review. `coverage_notes` is an optional list of short strings describing missing history, limited scope, or unfinished review; clear resolved limitations. Do not duplicate milestones or unresolved product questions in JSON.
+On init replace timestamp nulls with actual UTC ISO 8601 timestamps. `last_reviewed_commit` is a full verified commit ID, or null when no Git commit has been reviewed. `last_reviewed_at` records init/update review time, not a read-only review. `coverage_notes` is an optional list of short strings describing missing history, limited scope, or unfinished review; clear resolved limitations. `scope` is used only by named records: a list of project-relative paths the record covers, such as `["skills/tmpmd"]`; leave it out for a single `portfolio/` record, where the whole repository is in scope. Do not duplicate milestones or unresolved product questions in JSON.
 
 Save Markdown before advancing state. If interrupted, the old cursor lets the next update safely re-review and deduplicate. A no-op update may change the review timestamp and cursor while leaving Markdown untouched.

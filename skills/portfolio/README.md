@@ -36,6 +36,20 @@ portfolio/
 
 These hold the project context, milestones, decisions and review checkpoint. Unsupported claims stay marked as unknown.
 
+When one repository holds several projects, such as a monorepo or a collection of skills, each gets its own named record:
+
+```text
+portfolio/
+├── app/
+│   ├── context.md
+│   └── …
+└── website/
+    ├── context.md
+    └── …
+```
+
+Name the project when you ask, for example: “Initialise Portfolio for the website.”
+
 For a review across projects, supply each project’s records.
 
 ## Optional checkpoint tracking

@@ -20,4 +20,4 @@ Five initial commits produced three milestones and one decision across four reco
 
 ## Limits
 
-Testing covered manual use of the protocol and file structure. It did not include independent agent evaluation, production integration, or these documented cases: skill discovery across agents, concurrent writers, shallow history, branch switching, and rebases. Global agent configuration was unchanged.
+Testing covered manual use of the protocol and file structure. It did not include independent agent evaluation, production integration, or these documented cases: skill discovery across agents, concurrent writers, shallow history, branch switching, rebases, and named records for repositories with several projects. Global agent configuration was unchanged.
