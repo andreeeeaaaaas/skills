@@ -15,7 +15,7 @@ Follow the [installation instructions](../../README.md#install). Make sure a Mar
 Ask your AI:
 
 - **“/tmpmd”** Save and open the last answer.
-- **“/tmpmd <text>”** Save and open that text instead.
+- **“/tmpmd `<text>`”** Save and open that text instead.
 - **“/tmpmd on”** Update one note after every answer for the rest of the session (Claude Code only).
 - **“/tmpmd off”** Stop updating the note.
 
