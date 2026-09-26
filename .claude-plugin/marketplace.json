@@ -13,7 +13,18 @@
       "description": "Build an evidence-backed record of your projects, contributions, decisions and outcomes for portfolio narratives and career discussions.",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/portfolio"]
+      "skills": [
+        "./skills/portfolio"
+      ]
+    },
+    {
+      "name": "tmpmd",
+      "description": "Open your agent's last answer as a temporary Markdown note, or keep one updating as you work.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/tmpmd"
+      ]
     }
   ]
 }

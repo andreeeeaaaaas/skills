@@ -5,7 +5,10 @@ Skills I've created for Claude Code, Codex and other agents that read `SKILL.md`
 ## Available skills
 
 ### [/portfolio](skills/portfolio)
-Record contributions, decisions, and key context over time across personal and work projects. 
+Record contributions, decisions, and key context over time across personal and work projects.
+
+### [/tmpmd](skills/tmpmd)
+Open your agent's last answer as a temporary Markdown note, or keep one updating as you work.
 
 ## Install
 
@@ -21,14 +24,17 @@ npx skills add andreeeeaaaaas/skills
 
 ### AI chats and projects
 
-Upload the skill’s `SKILL.md` and any referenced files. For `/portfolio`, include `references/format.md`.
+Upload the skill’s `SKILL.md` and any referenced files. For `/portfolio`, include `references/format.md`. `/tmpmd` needs an agent that can run shell commands.
 
 ### Claude Code plugin
 
 ```text
 /plugin marketplace add andreeeeaaaaas/skills
 /plugin install portfolio@andreeeeaaaaas-skills
+/plugin install tmpmd@andreeeeaaaaas-skills
 ```
+
+`/tmpmd on` also needs a hook in your settings. See [continuous mode setup](skills/tmpmd/README.md#continuous-mode-setup).
 
 ### Manual installation
 
