@@ -2,17 +2,19 @@
 """Claude Code Stop hook for /tmpmd continuous mode.
 
 When $TMPDIR/tmpmd/on/<session_id> exists, writes the last prompt and response
-to $TMPDIR/tmpmd/tmpmd-c-<project>-<id>.md. Opens it on first write; Obsidian refreshes
+to $TMPDIR/tmpmd/tmpmd-c-<project>-<id>.md. Opens it in a new Obsidian tab on first write; Obsidian refreshes
 the open tab on later writes. Never blocks or fails the session;
 problems are written to $TMPDIR/tmpmd/hook.log.
 """
 import json
 import os
 import re
-import subprocess
 import sys
 import traceback
 from datetime import datetime
+
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+from open import open_file  # noqa: E402
 
 WORDS = 20
 
@@ -90,7 +92,7 @@ def main():
     with open(path, "w") as f:
         f.write((f"> {prompt}\n\n" if prompt else "") + response + "\n")
     if is_new:
-        subprocess.run(["open", path], check=False)
+        open_file(path)
 
 
 if __name__ == "__main__":

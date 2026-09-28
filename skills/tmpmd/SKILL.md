@@ -1,6 +1,6 @@
 ---
 name: tmpmd
-description: Save your last response, with the prompt that triggered it, to a temporary Markdown file and open it in the default Markdown app (Obsidian). Use for /tmpmd, /tmpmd on, /tmpmd off, or when the user asks to open, view or read the last output as Markdown.
+description: Save your last response, with the prompt that triggered it, to a temporary Markdown file and open it in a new Obsidian tab (or the default Markdown app). Use for /tmpmd, /tmpmd on, /tmpmd off, or when the user asks to open, view or read the last output as Markdown.
 ---
 
 # tmpmd
@@ -20,14 +20,16 @@ cat > "$f" <<'TMPMD_EOF'
 
 <last response>
 TMPMD_EOF
-open "$f"
+python3 <skill dir>/scripts/open.py "$f"
 ```
 
-Keep the quoted `'TMPMD_EOF'` delimiter so `$`, backticks and backslashes in the response are written as-is. If the response contains a line that is exactly `TMPMD_EOF`, use a different delimiter. If your host has a file-writing tool, you can write the file with it instead and then run `open`.
+`<skill dir>` is this skill's folder (in Claude Code, `~/.claude/skills/tmpmd`).
 
-The file is named `tmpmd-<project>-<session>.md`, so each `/tmpmd` in a session overwrites the last one and the open tab refreshes. Without a session ID (other agents), a timestamp replaces it.
+Keep the quoted `'TMPMD_EOF'` delimiter so `$`, backticks and backslashes in the response are written as-is. If the response contains a line that is exactly `TMPMD_EOF`, use a different delimiter. If your host has a file-writing tool, you can write the file with it instead and then run `open.py`.
 
-On Linux use `xdg-open` instead of `open`.
+The file is named `tmpmd-<project>-<session>.md`, so each `/tmpmd` in a session overwrites the last one. `open.py` opens it in a new Obsidian tab, or focuses the tab already showing it, which refreshes. Without a session ID (other agents), a timestamp replaces it.
+
+`open.py` needs the Obsidian CLI (Obsidian 1.12+, turned on in Settings > General). Without it, or on Linux, it falls back to `open` or `xdg-open`, which replaces the active Obsidian tab.
 
 4. Reply with only the file path.
 
@@ -35,7 +37,7 @@ If the user passes text after `/tmpmd` (other than `on` or `off`), write that te
 
 ## Continuous mode (Claude Code only)
 
-A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) rewrites one file per session, `$TMPDIR/tmpmd/tmpmd-c-<project>-<session>.md`, after every response. It opens the file on first write; Obsidian refreshes the open tab after that.
+A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) rewrites one file per session, `$TMPDIR/tmpmd/tmpmd-c-<project>-<session>.md`, after every response. It opens the file in a new tab on first write; Obsidian refreshes the open tab after that.
 
 - `/tmpmd on`: run the command below, then reply with only `tmpmd on`. The file opens straight away and updates after each response.
   ```bash
@@ -45,7 +47,7 @@ A Stop hook (`scripts/tmpmd-hook.py`, registered in `~/.claude/settings.json`) r
   ```bash
   tmp="${TMPDIR:-/tmp}"; rm -f "${tmp%/}/tmpmd/on/$CLAUDE_CODE_SESSION_ID"
   ```
-- If the user closed the tab, reopen it with `open "${TMPDIR%/}"/tmpmd/tmpmd-c-*-"${CLAUDE_CODE_SESSION_ID:0:8}".md`.
+- If the user closed the tab, reopen it with `python3 <skill dir>/scripts/open.py "${TMPDIR%/}"/tmpmd/tmpmd-c-*-"${CLAUDE_CODE_SESSION_ID:0:8}".md`.
 - If notes stop updating, read `$TMPDIR/tmpmd/hook.log`. It holds the hook's latest error, such as a transcript format change.
 
 In other agents, or if `$CLAUDE_CODE_SESSION_ID` is empty, say continuous mode needs the Claude Code hook and stop.

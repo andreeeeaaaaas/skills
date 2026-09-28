@@ -2,13 +2,13 @@
 
 Use `/tmpmd` to read your agent's last answer somewhere nicer than the terminal.
 
-Your agent saves its last answer, headed by the prompt that triggered it, to a temporary Markdown file and opens it in your default Markdown app, such as Obsidian. Files live in your system's temp folder, so nothing is added to your notes or vault.
+Your agent saves its last answer, headed by the prompt that triggered it, to a temporary Markdown file and opens it in a new Obsidian tab, or your default Markdown app. Files live in your system's temp folder, so nothing is added to your notes or vault.
 
 Most useful for long answers, plans and write-ups you want to read properly or keep open while you work.
 
 ## Setup
 
-Follow the [installation instructions](../../README.md#install). Make sure a Markdown app is set as the default for `.md` files.
+Follow the [installation instructions](../../README.md#install). For new tabs, turn on the Obsidian CLI (Obsidian 1.12+, Settings > General). Without it, notes open in your default app for `.md` files, which in Obsidian replaces the active tab.
 
 ## Use
 
