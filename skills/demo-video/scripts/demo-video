@@ -1,0 +1,10 @@
+#!/bin/sh
+# Builds the tool on first use (or after its source changes), then runs it.
+set -e
+self="$(readlink -f "$0")"
+dir="$(cd "$(dirname "$self")/../tool" && pwd)"
+bin="$dir/.build/release/demo-video"
+if [ ! -x "$bin" ] || [ -n "$(find "$dir/Sources" "$dir/Package.swift" -newer "$bin" 2>/dev/null)" ]; then
+  swift build -c release --package-path "$dir" >&2
+fi
+exec "$bin" "$@"

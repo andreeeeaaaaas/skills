@@ -25,6 +25,15 @@
       "skills": [
         "./skills/tmpmd"
       ]
+    },
+    {
+      "name": "demo-video",
+      "description": "Turn a timed script into a demo video of a macOS or iOS Simulator app, driven and recorded for you.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/demo-video"
+      ]
     }
   ]
 }

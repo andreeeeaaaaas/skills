@@ -7,6 +7,9 @@ Skills I've created for Claude Code, Codex and other agents that read `SKILL.md`
 ### [/portfolio](skills/portfolio)
 Record contributions, decisions, and key context over time across personal and work projects.
 
+### [/demo-video](skills/demo-video)
+Turn a timed script into a demo video of a macOS or iOS Simulator app, driven and recorded for you.
+
 ### [/tmpmd](skills/tmpmd)
 Open your agent's last answer as a temporary Markdown note, or keep one updating as you work.
 
@@ -24,13 +27,14 @@ npx skills add andreeeeaaaaas/skills
 
 ### AI chats and projects
 
-Upload the skill’s `SKILL.md` and any referenced files. For `/portfolio`, include `references/format.md`. `/tmpmd` needs an agent that can run shell commands.
+Upload the skill’s `SKILL.md` and any referenced files. For `/portfolio`, include `references/format.md`. `/demo-video` needs an agent that can run shell commands on a Mac. `/tmpmd` needs an agent that can run shell commands.
 
 ### Claude Code plugin
 
 ```text
 /plugin marketplace add andreeeeaaaaas/skills
 /plugin install portfolio@andreeeeaaaaas-skills
+/plugin install demo-video@andreeeeaaaaas-skills
 /plugin install tmpmd@andreeeeaaaaas-skills
 ```
 
